@@ -1,0 +1,40 @@
+{
+  "name": "tosendgraphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "clean": "rimraf build",
+    "start": "node build/index.js ",
+    "prestart": "npm-run-all clean tsc",
+    "clean-build-start": "npm-run-all clean tsc start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@typegoose/typegoose": "^7.3.0",
+    "@types/graphql": "^14.5.0",
+    "@types/mongoose": "^5.7.30",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
+    "fastify": "^3.1.1",
+    "fastify-gql": "^5.1.2",
+    "graphql": "^15.3.0",
+    "graphql-fields-list": "^2.1.3",
+    "mongoose": "^5.9.22",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0-rc.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.21",
+    "cross-fetch": "^3.0.5",
+    "eslint": "^7.4.0",
+    "eslint-plugin-import": "^2.22.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  }
+}
