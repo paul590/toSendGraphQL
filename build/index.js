@@ -18,7 +18,14 @@ async function setUpServer() {
         schema,
         jit: 1,
         path: "/",
-        graphiql: "playground"
+        graphiql: "playground",
+        errorHandler: false
+    });
+    server.setErrorHandler((error, request, reply) => {
+        const testError = {
+            test: "error handler test"
+        };
+        reply.send(testError);
     });
     let port = 8081;
     server.listen(port).then((url) => {

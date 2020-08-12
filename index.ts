@@ -19,6 +19,12 @@ async function setUpServer(){
         graphiql: "playground",
         errorHandler: false
     })
+    server.setErrorHandler((error, request, reply) => {
+        const testError = {
+            test: "error handler test"
+        }
+        reply.send(testError);
+    });
 
     let port = 8081;
     server.listen(port).then((url) => {
