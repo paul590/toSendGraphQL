@@ -5,8 +5,47 @@ open browser and enter: http://127.0.0.1:8081/playground
 
 enter query: 
 
-query {
-  test(code: "test")
+mutation {
+  save(input: {
+    code: "test"
+  }){
+    code
+  }
 }
 
-you will see 500 error. On code remove the errorHandler: false it throws correct format on manual error but format changes when system throws error such as when using an incorrect function like test2(code: "test").
+You will see 500 error with error: 
+{
+  "error": {
+    "errors": [
+      {
+        "message": "Test already exists",
+        "locations": [
+          {
+            "line": 2,
+            "column": 3
+          }
+        ],
+        "path": [
+          "save"
+        ]
+      }
+    ],
+    "data": null
+  }
+}
+
+next run query:
+mutation {
+  save(input: {
+    code: null
+  }){
+    code
+  }
+}
+
+You will receive a 400 error with the custom error handler:
+{
+  "error": {
+    "test": "error handler test"
+  }
+}
