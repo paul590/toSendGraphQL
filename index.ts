@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-import fastify from "fastify";
+import fastify, { FastifyError } from "fastify";
+import { GraphQLError } from "graphql";
 import GQL from "fastify-gql";
 import { TestResolver } from "./TestResolver";
 import { Database } from "./Database";
@@ -23,12 +24,26 @@ async function setUpServer(){
         path: "/",
         graphiql: "playground",
         errorHandler: false,
-        cache: false
-    });
+        cache: false,
+        errorFormatter: (error: FastifyError | GraphQLError | Error) => {
+            console.log("Begin of formatter");
+            console.log(error);
+            let testError = error as any;
+            testError.statusCode = 400;
+            testError.data = {message: "error test"};
+            console.log("Middle of formatter: testError");
+            console.log(testError);
+            console.log("End of formatter");
+            return testError;
+        }
+    } as any);
     server.setErrorHandler((error, request, reply) => {
+        console.log("Begin of handler");
+        console.log(error);
         const testError = {
             test: "error handler test"
         }
+        console.log("End of handler");
         reply.send(testError);
     });
 

@@ -13,26 +13,15 @@ mutation {
   }
 }
 
+press run button twice to generate error.
+
 You will see 500 error with error: 
 {
   "error": {
-    "errors": [
-      {
-        "message": "Test already exists",
-        "locations": [
-          {
-            "line": 2,
-            "column": 3
-          }
-        ],
-        "path": [
-          "save"
-        ]
-      }
-    ],
-    "data": null
+    "test": "error handler test"
   }
 }
+Please look at logs. 500 errors go through errorFormatter, however, fails on the errorHandler when trying to print the error due to data being null. Ideally we want to use the error message coming form the error.
 
 next run query:
 mutation {
@@ -49,3 +38,4 @@ You will receive a 400 error with the custom error handler:
     "test": "error handler test"
   }
 }
+Please look at logs. 400 errors DO NOT go through errorFormatter, they go directly to the error handler.

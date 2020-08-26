@@ -24,12 +24,26 @@ async function setUpServer() {
         path: "/",
         graphiql: "playground",
         errorHandler: false,
-        cache: false
+        cache: false,
+        errorFormatter: (error) => {
+            console.log("Begin of formatter");
+            console.log(error);
+            let testError = error;
+            testError.statusCode = 400;
+            testError.data = { message: "error test" };
+            console.log("Middle of formatter: testError");
+            console.log(testError);
+            console.log("End of formatter");
+            return testError;
+        }
     });
     server.setErrorHandler((error, request, reply) => {
+        console.log("Begin of handler");
+        console.log(error);
         const testError = {
             test: "error handler test"
         };
+        console.log("End of handler");
         reply.send(testError);
     });
     let port = 8081;
