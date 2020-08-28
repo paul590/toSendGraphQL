@@ -4,13 +4,9 @@ import fastify, { FastifyError } from "fastify";
 import { GraphQLError } from "graphql";
 import GQL from "fastify-gql";
 import { TestResolver } from "./TestResolver";
-import { Database } from "./Database";
 import { Test, TestModel } from "./Test";
 
 async function setUpServer(){
-
-    const db = new Database();
-    await db.setup();
 
     const schema = await buildSchema({
         resolvers: [TestResolver],
@@ -47,12 +43,10 @@ async function setUpServer(){
         reply.send(testError);
     });
 
-    let port = 8081;
+    let port = 8082;
     server.listen(port).then((url) => {
         console.info("Server is running at ", url, "/playground");
     });
-
-    await loadData();
 }
 
 async function loadData() {

@@ -15,8 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const TestService_1 = require("./TestService");
-const Test_1 = require("./Test");
-const TestInput_1 = require("./TestInput");
 let TestResolver = class TestResolver {
     constructor() {
         this.testService = new TestService_1.TestService();
@@ -24,24 +22,14 @@ let TestResolver = class TestResolver {
     async find(code) {
         return await this.testService.getTest(code);
     }
-    async save(input) {
-        return await this.testService.save(input);
-    }
 };
 __decorate([
-    type_graphql_1.Query(returns => [Test_1.Test], { nullable: true }),
+    type_graphql_1.Query(returns => String, { nullable: true }),
     __param(0, type_graphql_1.Arg("code", { nullable: false })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], TestResolver.prototype, "find", null);
-__decorate([
-    type_graphql_1.Mutation(returns => Test_1.Test),
-    __param(0, type_graphql_1.Arg("input", { nullable: false })),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [TestInput_1.TestInput]),
-    __metadata("design:returntype", Promise)
-], TestResolver.prototype, "save", null);
 TestResolver = __decorate([
     type_graphql_1.Resolver()
 ], TestResolver);

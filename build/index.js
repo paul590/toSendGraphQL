@@ -8,11 +8,8 @@ const type_graphql_1 = require("type-graphql");
 const fastify_1 = __importDefault(require("fastify"));
 const fastify_gql_1 = __importDefault(require("fastify-gql"));
 const TestResolver_1 = require("./TestResolver");
-const Database_1 = require("./Database");
 const Test_1 = require("./Test");
 async function setUpServer() {
-    const db = new Database_1.Database();
-    await db.setup();
     const schema = await type_graphql_1.buildSchema({
         resolvers: [TestResolver_1.TestResolver],
         validate: true
@@ -46,11 +43,10 @@ async function setUpServer() {
         console.log("End of handler");
         reply.send(testError);
     });
-    let port = 8081;
+    let port = 8082;
     server.listen(port).then((url) => {
         console.info("Server is running at ", url, "/playground");
     });
-    await loadData();
 }
 async function loadData() {
     let testData = new Test_1.Test();

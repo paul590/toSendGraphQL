@@ -5,12 +5,8 @@ open browser and enter: http://127.0.0.1:8081/playground
 
 enter query: 
 
-mutation {
-  save(input: {
-    code: "test"
-  }){
-    code
-  }
+query {
+  find(code: "test")
 }
 
 press run button twice to generate error.
@@ -24,12 +20,8 @@ You will see 500 error with error:
 Please look at logs. 500 errors go through errorFormatter, however, fails on the errorHandler when trying to print the error due to data being null. Ideally we want to use the error message coming form the error.
 
 next run query:
-mutation {
-  save(input: {
-    code: null
-  }){
-    code
-  }
+query {
+  find(code: null)
 }
 
 You will receive a 400 error with the custom error handler:
