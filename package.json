@@ -18,7 +18,7 @@
     "@types/graphql": "^14.5.0",
     "@types/mongoose": "^5.7.36",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "fastify": "^3.2.0",
     "fastify-gql": "^5.3.3",
     "graphql": "^15.3.0",
